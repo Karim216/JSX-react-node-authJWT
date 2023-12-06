@@ -1,16 +1,9 @@
 require("dotenv").config();
-// require('dotenv').config({ path: '.env.development' });
 const express = require("express");
 const bodyParser = require('body-parser');
 const path = require('path');
-// const bodyParser = require("body-parser"); /* deprecated */
 const cors = require("cors");
-
 const cookieParser = require('cookie-parser');
-
-// const swaggerJsdoc = require('swagger-jsdoc');
-// const swaggerUi = require('swagger-ui-express');
-
 const app = express();
 
 // Configuration du middleware CORS
