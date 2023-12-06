@@ -1,149 +1,106 @@
-const sql = require("./db.js");
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db.config.js');
 
-// constructor
-const User = function (user) {
-  this.firstname = user.firstname;
-  this.lastname = user.lastname;
-  this.email = user.email;
-  this.created_at = user.created_at;
-  this.password = user.password;
-};
+const User = sequelize.define('User', {
+  firstname: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  lastname: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  created_at: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+}, {
+  tableName: 'user',
+});
 
-User.create = (newUser, result) => {
-  sql.query("INSERT INTO user SET ?", newUser, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
+// Opérateur Sequelize pour les requêtes complexes
+const { Op } = require('sequelize');
 
-    console.log("created User: ", { id: res.insertId, ...newUser });
-    result(null, { id: res.insertId, ...newUser });
-  });
-};
+// Opérations CRUD
 
-User.findById = (id, result) => {
-  sql.query(`SELECT * FROM user WHERE id = ${id}`, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
-
-    if (res.length) {
-      console.log("found User: ", res[0]);
-      result(null, res[0]);
-      return;
-    }
-
-    // not found User with the id
-    result({ kind: "not_found" }, null);
-  });
-};
-
-User.getAll = (email, result) => {
-  let query = `SELECT * FROM user ORDER BY created_at DESC;`;
-
-  if (email) {
-    query += `WHERE email LIKE '%${email}%'`;
+// Créer un nouvel utilisateur
+User.createOne = async (newUser) => {
+  try {
+    const createdUser = await User.create(newUser);
+    return createdUser;
+  } catch (error) {
+    throw error;
   }
-
-  sql.query(query, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
-    }
-
-    console.log("users: ", res);
-    result(null, res);
-  });
 };
 
-User.updateById = (id, user, result) => {
-  sql.query(
-    "UPDATE user SET firstname = ?, lastname = ?, email = ?, updated_at = NOW() WHERE id = ?",
-    [
-      user.firstname,
-      user.lastname,
-      user.email,
-      id,
-    ],
-    (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
-
-      if (res.affectedRows == 0) {
-        // not found User with the id
-        result({ kind: "not_found" }, null);
-        return;
-      }
-
-      console.log("updated user: ", { id: id, ...user });
-      result(null, { id: id, ...user });
+// Obtenir un utilisateur par son ID
+User.findById = async (id) => {
+  try {
+    const user = await User.findByPk(id);
+    if (user) {
+      return user;
     }
-  );
+    throw { kind: 'not_found' };
+  } catch (error) {
+    throw error;
+  }
 };
 
-User.updatePasswordById = (id, newPassword, user, result) => {
-  sql.query(
-    "UPDATE user SET password = ? WHERE id = ?",
-    [
-      newPassword,
-      id,
-    ],
-    (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
+// Obtenir tous les utilisateurs avec ou sans filtre par e-mail
+User.findAllUsers = async (email = null) => {
+  try {
+    let options = {
+      order: [['created_at', 'DESC']],
+    };
 
-      if (res.affectedRows == 0) {
-        // not found User with the id
-        result({ kind: "not_found" }, null);
-        return;
-      }
-
-      console.log("updated user: ", { id: id, ...user });
-      result(null, { id: id, ...user });
+    if (email) {
+      options.where = {
+        email: { [Op.like]: `%${email}%` },
+      };
     }
-  );
+
+    const users = await User.findAll(options);
+    return users;
+  } catch (error) {
+    throw error;
+  }
 };
 
-User.remove = (id, result) => {
-  sql.query(`DELETE FROM user WHERE id = ?`, [id], (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
+// Mettre à jour un utilisateur par son ID
+User.updateById = async (id, updatedUser) => {
+  try {
+    const user = await User.findByPk(id);
+    if (user) {
+      await user.update(updatedUser);
+      return user;
     }
-
-    if (res.affectedRows == 0) {
-      // not found User with the id
-      result({ kind: "not_found" }, null);
-      return;
-    }
-
-    console.log("deleted User with id: ", id);
-    result(null, res);
-  });
+    throw { kind: 'not_found' };
+  } catch (error) {
+    throw error;
+  }
 };
 
-User.removeAll = (result) => {
-  sql.query("DELETE FROM user", (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
+// Supprimer un utilisateur par son ID
+User.deleteById = async (id) => {
+  try {
+    const user = await User.findByPk(id);
+    if (user) {
+      await user.destroy();
+      return true; // La suppression a réussi
     }
-
-    console.log(`deleted ${res.affectedRows} users`);
-    result(null, res);
-  });
+    throw { kind: 'not_found' };
+  } catch (error) {
+    throw error;
+  }
 };
 
 module.exports = User;

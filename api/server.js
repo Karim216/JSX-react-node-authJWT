@@ -1,4 +1,4 @@
-require("dotenv").config();
+// require("dotenv").config();
 const express = require("express");
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -39,11 +39,6 @@ const options = {
   apis: ['./app/routes/*.routes.js'],
 };
 
-const specs = swaggerJsdoc(options);
-
-// Configuration Swagger UI
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
-
 app.use(bodyParser.json());
 
 app.use(cors(corsOptions));
@@ -61,14 +56,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to API." });
 });
 
-// Définition de la route pour les images d'utilisateurs
-const publicDirectoryPath = path.join(__dirname, 'public', 'images', 'users');
-app.use('/app/public/images/users', express.static(publicDirectoryPath));
-
-require("./app/routes/user.routes.js")(app);
-require("./app/routes/auth.routes.js")(app);
-require("./app/routes/logout.routes.js")(app);
-require("./app/routes/me.routes.js")(app);
+require("./src/routes/user.routes.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8082;

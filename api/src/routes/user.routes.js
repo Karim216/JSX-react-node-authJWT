@@ -1,16 +1,13 @@
 module.exports = (userapp) => {
   const users = require("../controllers/user.controller.js");
-  const verifyToken = require("../middlewares/auth.jwt");
   const router = require("express").Router();
 
-  router.use(verifyToken);
-  router.post("/", users.create);
-  router.get("/", users.findAll);
-  router.get("/:id", users.findOne);
-  router.put("/:id", users.update);
-  router.put("/password/:id", users.updatePassword);
-  router.delete("/:id", users.delete);
-  router.delete("/", users.deleteAll);
+  // router.use(verifyToken);
+  router.post("/", users.createUser);
+  router.get("/:id", users.getUserById);
+  router.get("/", users.getAllUsers);
+  router.put("/:id", users.updateUserById);
+  router.delete("/:id", users.deleteUserById);
 
   userapp.use("/api/users", router);
 };
