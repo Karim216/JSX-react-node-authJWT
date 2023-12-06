@@ -3,13 +3,10 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require("cors");
-const cookieParser = require('cookie-parser');
 const app = express();
 
 // Configuration du middleware CORS
 app.use(cors());
-
-app.use(cookieParser());
 
 var corsOptions = {
   origin: function (origin, callback) {
