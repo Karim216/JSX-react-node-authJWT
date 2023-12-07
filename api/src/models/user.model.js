@@ -3,15 +3,15 @@ const sequelize = require('../database/db.config.js');
 
 const User = sequelize.define('User', {
   firstname: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
   lastname: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
   email: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(150),
     allowNull: false,
     unique: true,
   },
@@ -20,7 +20,7 @@ const User = sequelize.define('User', {
     defaultValue: DataTypes.NOW,
   },
   password: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(150),
     allowNull: false,
   },
 }, {

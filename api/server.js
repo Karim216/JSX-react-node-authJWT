@@ -1,10 +1,14 @@
-// require("dotenv").config();
 const express = require("express");
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require("cors");
 const app = express();
+const cookieSession = require("cookie-session");
+const passport = require("passport");
 
+const middlewares = require("./src/middlewares.js");
+
+require("dotenv").config();
 // Configuration du middleware CORS
 app.use(cors());
 
@@ -36,12 +40,25 @@ const options = {
   apis: ['./app/routes/*.routes.js'],
 };
 
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [process.env.COOKIE_KEY],
+  })
+);
+
 app.use(bodyParser.json());
 
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
 app.use(express.json()); /* bodyParser.json() is deprecated */
+
+app.use(middlewares.notFound);
+app.use(middlewares.errorHandler);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(
@@ -50,7 +67,7 @@ app.use(
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to API." });
+  res.json({ message: "🦄🌈✨👋🌎🌍🌏✨🌈🦄" });
 });
 
 require("./src/routes/user.routes.js")(app);
