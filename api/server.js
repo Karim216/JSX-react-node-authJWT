@@ -6,8 +6,6 @@ const app = express();
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 
-const middlewares = require("./src/middlewares.js");
-
 require("dotenv").config();
 // Configuration du middleware CORS
 app.use(cors());
@@ -54,9 +52,6 @@ app.use(cors(corsOptions));
 // parse requests of content-type - application/json
 app.use(express.json()); /* bodyParser.json() is deprecated */
 
-app.use(middlewares.notFound);
-app.use(middlewares.errorHandler);
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -71,6 +66,7 @@ app.get("/", (req, res) => {
 });
 
 require("./src/routes/user.routes.js")(app);
+require("./src/routes/auth.routes.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8082;

@@ -1,0 +1,59 @@
+Template API REST avec NodeJS et MySQL
+====================
+
+Organisation des dossiers et fichiers
+-------------------------------------
+
+/api							Code source de l'application
+	/node_modules		Dépendances du Projet : Ce dossier inclut toutes les bibliothèques et modules tiers que le projet utilise. Ces dépendances sont
+                  définies dans le fichier "package.json" sous la section "dependencies" et "devDependencies".
+  /src						Code source principal de l'application
+    /auth								Le M de MVC, le coeur de l'application
+    /controllers								Le V de MVC, les fichiers statiques (CSS, JS, images, fonts, etc.)
+    /database							Feuilles de styles CSS
+    /middlewares							Polices de caractères
+    /models							Polices de caractères
+    /public							Polices de caractères
+    /routes							Polices de caractères
+    /seedDatabase							Polices de caractères
+    middlewares.js		Contrôleur de la page d'accueil
+.env								Code source générique, réutilisable dans d'autres projets
+package-lock.json					Classe d'accès à la base de données
+package.json								Code principal
+server.js								Code principal
+
+
+Liens intéressants
+------------------
+
+- Upload de fichiers en PHP :
+  http://www.php.net/manual/en/features.file-upload.post-method.php
+
+- Veille Intégration HTML/CSS et JavaScript :
+  https://uptodate.frontendrescue.org/
+
+- UX Design :
+  http://www.eyrolles.com/Informatique/Livre/design-d-experience-utilisateur-9782212141764
+
+- Learning PHP, MySQL and JavaScript :
+  http://shop.oreilly.com/product/0636920036463.do
+  http://www.amazon.com/Learning-PHP-MySQL-JavaScript-Javascript/dp/1491918667
+
+- OWASP :
+  https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project
+
+
+
+Syntaxes SQL
+------------
+
+UPDATE NomTable
+	SET NomColonne1 = ValeurColonne1, NomColonne2 = ValeurColonne2, ...
+	WHERE Condition
+
+
+DELETE FROM NomTable
+	WHERE Condition
+- Veille Intégration HTML/CSS et JavaScript :
+  https://uptodate.frontendreProjet GrowKom
+====================

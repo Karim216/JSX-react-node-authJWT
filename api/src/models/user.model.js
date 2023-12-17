@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/db.config.js');
+const { Op } = require('sequelize');
 
 const User = sequelize.define('User', {
   firstname: {
@@ -27,9 +28,6 @@ const User = sequelize.define('User', {
   tableName: 'user',
 });
 
-// Opérateur Sequelize pour les requêtes complexes
-const { Op } = require('sequelize');
-
 // Opérations CRUD
 
 // Créer un nouvel utilisateur
@@ -51,6 +49,20 @@ User.findById = async (id) => {
     }
     throw { kind: 'not_found' };
   } catch (error) {
+    throw error;
+  }
+};
+
+User.findUserByEmail = async (email) => {
+  try {
+    // Utilisez findOne pour trouver un utilisateur par son email.
+    const user = await User.findOne({ where: { email: email } });
+    if(user){
+      return user; // user sera null si aucun utilisateur n'est trouvé
+    }
+    throw { kind: 'not_found' };
+  } catch (error) {
+    // Gestion des erreurs
     throw error;
   }
 };

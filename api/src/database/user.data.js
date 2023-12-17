@@ -9,19 +9,19 @@ const initialUsers = [
     firstname: 'John',
     lastname: 'Doe',
     email: 'john.doe@example.com',
-    password: 'password123',
+    password: '$2b$10$t.ppyWyymYUScNYG7BARP.SuIUiHg7te7.K42Lc.bX/G8FvsNd8oW',
   },
   {
     firstname: 'Patrick',
     lastname: 'Jacque',
     email: 'patrick.patrickoe@example.com',
-    password: 'password',
+    password: '$2b$10$t.ppyWyymYUScNYG7BARP.SuIUiHg7te7.K42Lc.bX/G8FvsNd8oW',
   },
   {
     firstname: 'Mohammed',
     lastname: 'Amine',
     email: 'amine@example.com',
-    password: 'password123',
+    password: '$2b$10$t.ppyWyymYUScNYG7BARP.SuIUiHg7te7.K42Lc.bX/G8FvsNd8oW',
   },
   // Ajoutez d'autres utilisateurs selon vos besoins
 ];
