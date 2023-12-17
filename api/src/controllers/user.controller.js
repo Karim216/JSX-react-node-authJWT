@@ -23,12 +23,14 @@ exports.createUser = async (req, res) => {
     password: passworHashed,
   });
 
+  // console.log(user.dataValues)
+
   try {
-    const newUser = await User.createOne(req.body);
+    const newUser = await User.createOne(user.dataValues);
 
     const emailSent = await sendEmailWithValidation(
       req.body.email,
-      newUser.password,
+      passwordRandaom,
       req.body.firstname
     );
 

@@ -8,7 +8,7 @@ const initialUsers = [
   {
     firstname: 'John',
     lastname: 'Doe',
-    email: 'john.doe@example.com',
+    email: 'contact@karim-betkom.com',
     password: '$2b$10$t.ppyWyymYUScNYG7BARP.SuIUiHg7te7.K42Lc.bX/G8FvsNd8oW',
   },
   {
