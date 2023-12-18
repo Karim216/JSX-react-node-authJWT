@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ disconnect }) => {
   return (
     <header className="border-b-2 border-gray-300 p-5">
       <nav className="container m-auto flex items-center justify-between">
@@ -17,8 +17,12 @@ const Header = () => {
           <li>
             <Link to="/accueil/users">Users</Link>
           </li>
-          <li>
-            <Link to="/" className="text-red-500">Disconnect</Link>
+          <li
+            className="text-red-500 cursor-pointer"
+            onClick={() => disconnect()}
+            title="Disconnect"
+          >
+            Disconnect
           </li>
         </ul>
         <div className="text-blue-700 font-bold">John Doe</div>

@@ -12,7 +12,7 @@ app.use(cors());
 
 var corsOptions = {
   origin: function (origin, callback) {
-    const whitelist = ["http://localhost:3000"];
+    const whitelist = ["http://localhost:5173"];
     if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
     } else {

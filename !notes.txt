@@ -1,62 +1,42 @@
-Template NodeJS - ReactJS - MySQL
+Template API REST avec NodeJS et MySQL
 ====================
-
 
 Organisation des dossiers et fichiers
 -------------------------------------
 
-/application							Code source de l'application
-	/config								Configuration de l'application
-    	database.php					Configuration base de données (identifiants de connexion)
-    /controllers						Le C de MVC, les chefs d'orchestres de l'application
-    	HomeController.class.php		Contrôleur de la page d'accueil
-    /models								Le M de MVC, le coeur de l'application
-    /www								Le V de MVC, les fichiers statiques (CSS, JS, images, fonts, etc.)
-    	/css							Feuilles de styles CSS
-        /fonts							Polices de caractères
-        /images							Images
-        /js								Code source JavaScript
-        	/classes					Classes (code source orienté objet)
-        HomeView.phtml					Template interne de la page d'accueil
-        LayoutView.phtml				Template global
-/library								Code source générique, réutilisable dans d'autres projets
-	Database.class.php					Classe d'accès à la base de données
-index.php								Code principal
-
-
-
-D'autres dossiers et fichiers vont apparaître au fur et à mesure dans le dossier "application"
+/api							Code source de l'application
+	/node_modules		Dépendances du Projet : Ce dossier inclut toutes les bibliothèques et modules tiers que le projet utilise. Ces dépendances sont
+                  définies dans le fichier "package.json" sous la section "dependencies" et "devDependencies".
+  /src						Code source principal de l'application
+    /auth								Dossier contenant les fichiers liés à l'authentification
+    /controllers				Le C de MVC, le coeur de l'application
+    /database						Configuration de la base de données
+    /middlewares				Polices de caractères
+    /models							Le M de MVC, le coeur de l'application
+    /public							Dossier contenant les données static du projet
+    /routes							Configuration des routes pour chaque api
+.env								    Fichier contenant tous les variables environnantes
+package-lock.json				automatiquement généré
+package.json						automatiquement généré pour tout projet ayant des modules npm et il ne doit pas être modifié manuellement
+server.js								Point d'entrée principal de l'application
 
 
 
 Liens intéressants
 ------------------
 
-- Upload de fichiers en PHP :
-  http://www.php.net/manual/en/features.file-upload.post-method.php
+- React Router Dom :
+  https://fr.legacy.reactjs.org/docs/code-splitting.html#route-based-code-splitting
 
-- Veille Intégration HTML/CSS et JavaScript :
-  https://uptodate.frontendrescue.org/
-
-- UX Design :
-  http://www.eyrolles.com/Informatique/Livre/design-d-experience-utilisateur-9782212141764
-
-- Learning PHP, MySQL and JavaScript :
-  http://shop.oreilly.com/product/0636920036463.do
-  http://www.amazon.com/Learning-PHP-MySQL-JavaScript-Javascript/dp/1491918667
-
-- OWASP :
-  https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project
+- Install Tailwind CSS with Create React App :
+  https://tailwindcss.com/docs/guides/create-react-app
 
 
 
-Syntaxes SQL
-------------
 
-UPDATE NomTable
-	SET NomColonne1 = ValeurColonne1, NomColonne2 = ValeurColonne2, ...
-	WHERE Condition
+Install des dépendances
+-----------------------
 
-
-DELETE FROM NomTable
-	WHERE Condition
+- tailwindcss
+  1 - npm install tailwindcss postcss autoprefixer -D
+  2 - npx tailwindcss init -p

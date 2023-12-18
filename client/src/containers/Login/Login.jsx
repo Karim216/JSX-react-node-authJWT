@@ -3,6 +3,7 @@ import Button from "../../components/Button/Button";
 import LoginIcon from "../../assets/icons/login";
 import btnLoading from "../../assets/icons/btnLoading";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate()
@@ -21,7 +22,7 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (state.email === "") {
@@ -37,8 +38,31 @@ const Login = () => {
         passwordErr: "Password required",
       }));
     }
+
+    if (email && password) {
+      try {
+        const response = await axios.post(`http://localhost:8082/api/login`, {
+          email: state.email.trim(),
+          password: state.password.trim(),
+        });
+
+        localStorage.setItem('accessToken', response.data.accessToken);
+        localStorage.setItem('refreshToken', response.data.refreshToken);
+        navigate('/accueil');
+      } catch (error) {
+        setState((prevState) => ({
+          ...prevState,
+          email: '',
+          password: '',
+        }));
+        // setErrors((prevErrors) => ({
+        //   ...prevErrors,
+        //   auth: 'Erreur d\'authentification ! Identifiant ou mot de passe incorrect',
+        // }));
+        console.log(error);
+      }
+    }
     console.log(state);
-    navigate("/accueil")
   };
 
   return (
