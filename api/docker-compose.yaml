@@ -10,6 +10,7 @@ services:
     environment:
       - NODE_ENV=development
       - DB_HOST=mysql
+      - DB_TYPE=mysql
       - DB_USER=karim
       - DB_PASSWORD=test123
       - DB_NAME=template
