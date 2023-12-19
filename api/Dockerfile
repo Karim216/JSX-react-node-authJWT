@@ -5,8 +5,6 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm install
-# RUN nodejs src/database/sync-db.js
-# RUN nodejs src/database/user-data.js
 
 COPY . .
 

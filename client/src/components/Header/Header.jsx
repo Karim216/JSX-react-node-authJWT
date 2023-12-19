@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import UserIcon from "../../assets/icons/user";
 
-const Header = ({ disconnect }) => {
+const Header = ({ data, disconnect }) => {
+
+  console.log(data)
   return (
     <header className="border-b-2 border-gray-300 p-5">
       <nav className="container m-auto flex items-center justify-between">
@@ -25,7 +28,7 @@ const Header = ({ disconnect }) => {
             Disconnect
           </li>
         </ul>
-        <div className="text-blue-700 font-bold">John Doe</div>
+        <div className="text-blue-700 font-bold flex items-center gap-2" title={data.firstname +" "+data.lastname}><div><UserIcon color="#1d4ed8" /></div> {data.firstname +" "+data.lastname}</div>
       </nav>
     </header>
   );

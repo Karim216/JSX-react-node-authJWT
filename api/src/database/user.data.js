@@ -23,7 +23,13 @@ const initialUsers = [
     email: 'amine@example.com',
     password: '$2b$10$t.ppyWyymYUScNYG7BARP.SuIUiHg7te7.K42Lc.bX/G8FvsNd8oW',
   },
-  // Ajoutez d'autres utilisateurs selon vos besoins
+  {
+    firstname: 'Gilles',
+    lastname: 'Pengue',
+    email: 'pengue.gilles@growkom.com',
+    password: '$2b$10$t.ppyWyymYUScNYG7BARP.SuIUiHg7te7.K42Lc.bX/G8FvsNd8oW',
+  },
+  // Ajout d'autres utilisateurs selon vos besoins
 ];
 
 // Synchronisez la base de données et ajoutez les utilisateurs initiaux
