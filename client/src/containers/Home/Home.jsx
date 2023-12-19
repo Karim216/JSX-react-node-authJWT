@@ -1,11 +1,11 @@
-import React, { Fragment, useEffect } from "react";
-import Loading from "../../components/Loading/Loading";
-import Header from "../../components/Header/Header";
+import React, { Fragment, useEffect, lazy } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../redux/actions/users/actionFetchUser";
+import Loading from "../../components/Loading/Loading";
 
+const Header = lazy(() => import("../../components/Header/Header"));
 const config = {
   headers: {
     Authorization: "Bearer " + localStorage.getItem("accessToken"),
@@ -29,9 +29,11 @@ const Home = () => {
       })
       .catch((error) => {
         console.log("Erreur : ", error);
-        handleDisconnect();
+        navigate("/");
       });
-  }, [dispatch]);
+
+      console.log("connexion")
+  }, []);
 
 
   const handleDisconnect = async () => {
@@ -46,7 +48,7 @@ const Home = () => {
       console.log(error);
     }
   };
-  return (
+  return currentUser.isLoading ? (<Loading />) : (
     <Fragment>
       <Header disconnect={handleDisconnect} />
       <Outlet />

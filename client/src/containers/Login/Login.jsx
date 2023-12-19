@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Button from "../../components/Button/Button";
 import LoginIcon from "../../assets/icons/login";
-import btnLoading from "../../assets/icons/btnLoading";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -55,10 +54,6 @@ const Login = () => {
           email: '',
           password: '',
         }));
-        // setErrors((prevErrors) => ({
-        //   ...prevErrors,
-        //   auth: 'Erreur d\'authentification ! Identifiant ou mot de passe incorrect',
-        // }));
         console.log(error);
       }
     }
@@ -66,8 +61,8 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="w-2/5 border border-gray-300 rounded-md p-10">
+    <div className="md:container m-auto flex justify-center items-center h-screen">
+      <div className="md:w-96 border border-gray-300 rounded-md p-10">
         <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Sign in to your account
         </h2>
