@@ -1,42 +1,21 @@
-Template API REST avec NodeJS et MySQL
+Template Model MVC avec ReactJS et NodeJS
 ====================
 
 Organisation des dossiers et fichiers
 -------------------------------------
 
 /api							Code source de l'application
-	/node_modules		Dépendances du Projet : Ce dossier inclut toutes les bibliothèques et modules tiers que le projet utilise. Ces dépendances sont
-                  définies dans le fichier "package.json" sous la section "dependencies" et "devDependencies".
-  /src						Code source principal de l'application
-    /auth								Dossier contenant les fichiers liés à l'authentification
-    /controllers				Le C de MVC, le coeur de l'application
-    /database						Configuration de la base de données
-    /middlewares				Polices de caractères
-    /models							Le M de MVC, le coeur de l'application
-    /public							Dossier contenant les données static du projet
-    /routes							Configuration des routes pour chaque api
-.env								    Fichier contenant tous les variables environnantes
-package-lock.json				automatiquement généré
-package.json						automatiquement généré pour tout projet ayant des modules npm et il ne doit pas être modifié manuellement
-server.js								Point d'entrée principal de l'application
-
+/client
+.gitignore
+README.md
 
 
 Liens intéressants
 ------------------
 
-- React Router Dom :
-  https://fr.legacy.reactjs.org/docs/code-splitting.html#route-based-code-splitting
-
-- Install Tailwind CSS with Create React App :
-  https://tailwindcss.com/docs/guides/create-react-app
 
 
 
 
 Install des dépendances
 -----------------------
-
-- tailwindcss
-  1 - npm install tailwindcss postcss autoprefixer -D
-  2 - npx tailwindcss init -p

@@ -1,0 +1,49 @@
+version: '3.1'
+
+services:
+  nodejs:
+    build: .
+    ports:
+      - 8082:8082
+    depends_on:
+      - mysql
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=mysql
+      - DB_USER=karim
+      - DB_PASSWORD=test123
+      - DB_NAME=template
+      - PORT=8082
+    networks:
+      - mynetwork
+
+  mysql:
+    image: mysql:8.0.34
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=template
+      - MYSQL_USER=karim
+      - MYSQL_PASSWORD=test123
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - mynetwork
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    depends_on:
+      - mysql
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  mysql_data:

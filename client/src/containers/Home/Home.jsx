@@ -50,7 +50,7 @@ const Home = () => {
   };
   return currentUser.isLoading ? (<Loading />) : (
     <Fragment>
-      <Header disconnect={handleDisconnect} />
+      <Header data={currentUser.data} disconnect={handleDisconnect} />
       <Outlet />
     </Fragment>
   );

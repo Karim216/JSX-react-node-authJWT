@@ -11,7 +11,7 @@ app.use(cors());
 
 var corsOptions = {
   origin: function (origin, callback) {
-    const whitelist = ["http://localhost:5173"];
+    const whitelist = ["http://localhost:5173","http://localhost:3306","http://localhost:3000:80"];
     if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
     } else {
@@ -46,7 +46,7 @@ require("./src/routes/user.routes.js")(app);
 require("./src/routes/auth.routes.js")(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8082;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

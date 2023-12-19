@@ -5,58 +5,43 @@ Projet GrowKom
 Template NodeJS - ReactJS - MySQL
 -------------------------------------
 
-/application							Code source de l'application
-	/config								Configuration de l'application
-    	database.php					Configuration base de données (identifiants de connexion)
-    /controllers						Le C de MVC, les chefs d'orchestres de l'application
-    	HomeController.class.php		Contrôleur de la page d'accueil
-    /models								Le M de MVC, le coeur de l'application
-    /www								Le V de MVC, les fichiers statiques (CSS, JS, images, fonts, etc.)
-    	/css							Feuilles de styles CSS
-        /fonts							Polices de caractères
-        /images							Images
-        /js								Code source JavaScript
-        	/classes					Classes (code source orienté objet)
-        HomeView.phtml					Template interne de la page d'accueil
-        LayoutView.phtml				Template global
-/library								Code source générique, réutilisable dans d'autres projets
-	Database.class.php					Classe d'accès à la base de données
-index.php								Code principal
+/client							        Code source de l'application
+  /public                   Dossiers des fichiers accès public
+	/src								      Code source principal de l'application
+    /assets						      Dossier des fichiers statics
+    /components					    Composants prêts à l'emploi
+    /container					    Contenu qui incluant les composants
+    /redux							    Le V de MVC, éléments liés à Redux dans l'application
+    	/actions					    Actions redux, utilisées pour communiquer avec les réducteurs.
+    	/reducers					    Réducteurs Redux, récupère l'état actuel et une action, puis retourne un nouvel état.
+      constants.jsx		      Constantes utilisées dans le contexte de Redux, comme les types d'action
+      store.jsx				      Configure et crée le store Redux pour l'application
+    /utils                  Fonctions utilitaires utilisées partout dans l'application
+    App.jsx                 ...
+    index.jsx               ...
+  index.html								...
 
 
-
-D'autres dossiers et fichiers vont apparaître au fur et à mesure dans le dossier "application"
 
 
 
 Liens intéressants
 ------------------
 
+- React Router Dom :
+  https://fr.legacy.reactjs.org/docs/code-splitting.html#route-based-code-splitting
+
+- Install Tailwind CSS with Create React App :
+  https://tailwindcss.com/docs/guides/create-react-app
+
 - Json post API :
   https://jsonplaceholder.typicode.com/
 
-- Veille Intégration HTML/CSS et JavaScript :
-  https://uptodate.frontendrescue.org/
-
-- UX Design :
-  http://www.eyrolles.com/Informatique/Livre/design-d-experience-utilisateur-9782212141764
-
-- Learning PHP, MySQL and JavaScript :
-  http://shop.oreilly.com/product/0636920036463.do
-  http://www.amazon.com/Learning-PHP-MySQL-JavaScript-Javascript/dp/1491918667
-
-- OWASP :
-  https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project
 
 
+Install des dépendances
+-----------------------
 
-Syntaxes SQL
-------------
-
-UPDATE NomTable
-	SET NomColonne1 = ValeurColonne1, NomColonne2 = ValeurColonne2, ...
-	WHERE Condition
-
-
-DELETE FROM NomTable
-	WHERE Condition
+- tailwindcss
+  1 - npm install tailwindcss postcss autoprefixer -D
+  2 - npx tailwindcss init -p
