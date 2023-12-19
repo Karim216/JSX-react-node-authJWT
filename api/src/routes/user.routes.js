@@ -8,6 +8,7 @@ module.exports = (userapp) => {
   router.post("/", users.createUser);
   router.get("/:id", users.getUserById);
   router.get("/", users.getAllUsers);
+  router.get("/me/infos", users.getUserInfo);
   router.put("/:id", users.updateUserById);
   router.delete("/:id", users.deleteUserById);
 

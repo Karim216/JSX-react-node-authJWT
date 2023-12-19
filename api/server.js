@@ -3,8 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require("cors");
 const app = express();
-const cookieSession = require("cookie-session");
-const passport = require("passport");
+const cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 // Configuration du middleware CORS
@@ -24,26 +23,7 @@ var corsOptions = {
   // Vous pouvez ajouter d'autres options ici si nécessaire
 };
 
-// Configuration Swagger JSDoc
-const options = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'API',
-      version: '1.0.0',
-      description: 'A sample API',
-    },
-  },
-  // Chemin vers les fichiers de l'API
-  apis: ['./app/routes/*.routes.js'],
-};
-
-app.use(
-  cookieSession({
-    maxAge: 24 * 60 * 60 * 1000,
-    keys: [process.env.COOKIE_KEY],
-  })
-);
+app.use(cookieParser());
 
 app.use(bodyParser.json());
 
@@ -51,9 +31,6 @@ app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
 app.use(express.json()); /* bodyParser.json() is deprecated */
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(

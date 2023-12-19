@@ -26,7 +26,8 @@ const fetchCurrentUserError = (error) => {
 };
 
 export const getUser = () => {
-  const apiUrl = process.env.REACT_APP_API_BASE_URL;
+  const apiUrl = "http://localhost:8082/api"
+  // const apiUrl = process.env.REACT_APP_API_BASE_URL;
   return async (dispatch) => {
     dispatch(fetchCurrentUserLoading());
     const config = {
@@ -36,7 +37,7 @@ export const getUser = () => {
     };
     try {
       const response = await axios.get(
-        `${apiUrl}/me`,
+        `${apiUrl}/users/me/infos`,
         config
       );
       dispatch(fetchCurrentUserSuccess(response.data));

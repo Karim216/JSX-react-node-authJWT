@@ -84,7 +84,6 @@ const Login = () => {
             <div className="mt-2">
               <input
                 id="email"
-                name="email"
                 type="email"
                 autoComplete="email"
                 onChange={(e) =>
@@ -117,7 +116,6 @@ const Login = () => {
             <div className="mt-2">
               <input
                 id="password"
-                name="password"
                 type="password"
                 autoComplete="current-password"
                 onChange={(e) =>

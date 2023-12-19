@@ -1,6 +1,8 @@
 const User = require("../models/user.model.js");
 const { sendEmailWithValidation } = require("./sendmail.controller.js");
 const password = require("../auth/password.js");
+const jwt = require("jsonwebtoken");
+const config = require("../auth/jwt.config.js");
 
 // Opérations CRUD
 
@@ -107,5 +109,39 @@ exports.deleteUserById = async (req, res) => {
     res
       .status(500)
       .json({ error: "Erreur lors de la suppression de l'utilisateur" });
+  }
+};
+
+exports.getUserInfo = async (req, res) => {
+  const bearerHeader = req.headers["authorization"];
+  if (typeof bearerHeader !== "undefined") {
+    const bearer = bearerHeader.split(" ");
+    const token = bearer[1];
+
+    jwt.verify(token, config.secret, async (err, data) => {
+      if (err) {
+        res.sendStatus(403);
+      } else {
+        try {
+          let user = await User.findUserByEmail(data.email);
+          if (!user) {
+            res.status(404).send("User not found");
+            return;
+          }
+
+          res.json({
+              id: user.id,
+              email: user.email,
+              firstname: user.firstname,
+              lastname: user.lastname,
+          });
+        } catch (err) {
+          console.error(err);
+          res.status(500).send("Internal server error");
+        }
+      }
+    });
+  } else {
+    res.sendStatus(403);
   }
 };

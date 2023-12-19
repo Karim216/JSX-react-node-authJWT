@@ -32,8 +32,8 @@ D'autres dossiers et fichiers vont apparaître au fur et à mesure dans le dossi
 Liens intéressants
 ------------------
 
-- Upload de fichiers en PHP :
-  http://www.php.net/manual/en/features.file-upload.post-method.php
+- Json post API :
+  https://jsonplaceholder.typicode.com/
 
 - Veille Intégration HTML/CSS et JavaScript :
   https://uptodate.frontendrescue.org/
