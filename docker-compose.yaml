@@ -1,0 +1,12 @@
+# version: '2.4'
+
+# services:
+#   api:
+#     extends:
+#       file: api/docker-compose.yaml
+#       service: nodejs
+
+#   client:
+#     extends:
+#       file: client/docker-compose.yaml
+#       service: react-app
