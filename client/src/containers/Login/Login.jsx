@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "../../components/Button/Button";
 import LoginIcon from "../../assets/icons/login";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ConfigContext } from "../../index.jsx";
 
 const Login = () => {
   const navigate = useNavigate()
+  const {apiUrl, config} = useContext(ConfigContext)
   const [state, setState] = useState({
     email: "",
     emailErr: "",
@@ -40,7 +42,7 @@ const Login = () => {
 
     if (email && password) {
       try {
-        const response = await axios.post(`http://localhost:8082/api/login`, {
+        const response = await axios.post(`${apiUrl}/login`, {
           email: state.email.trim(),
           password: state.password.trim(),
         });

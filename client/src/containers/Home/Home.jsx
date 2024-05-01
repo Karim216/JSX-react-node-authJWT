@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, lazy } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../redux/actions/users/actionFetchUser";
 import Loading from "../../components/Loading/Loading";

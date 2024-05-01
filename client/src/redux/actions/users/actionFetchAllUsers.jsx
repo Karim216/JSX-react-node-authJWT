@@ -26,8 +26,7 @@ const fetchAllUsersError = (error) => {
 };
 
 export const getAllUsers = () => {
-  // const apiUrl = process.env.REACT_APP_API_BASE_URL;
-  const apiUrl = "http://localhost:8082/api"
+  const apiUrl = import.meta.env.VITE_REACT_APP_API_BASE_URL
   return async (dispatch) => {
     dispatch(fetchAllUsersLoading());
     const config = {
