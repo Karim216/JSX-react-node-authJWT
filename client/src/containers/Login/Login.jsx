@@ -1,19 +1,54 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Button from "../../components/Button/Button";
 import LoginIcon from "../../assets/icons/login";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import soleil from "../../assets/tendances/soleil.svg";
+import crepuscule from "../../assets/tendances/crepuscule.svg";
 import { ConfigContext } from "../../index.jsx";
 
 const Login = () => {
-  const navigate = useNavigate()
-  const {apiUrl, config} = useContext(ConfigContext)
+  const navigate = useNavigate();
+  const { apiUrl, config } = useContext(ConfigContext);
   const [state, setState] = useState({
     email: "",
     emailErr: "",
     password: "",
     passwordErr: "",
   });
+  const [darkMode, setDarkMode] = useState(false);
+
+  // Appliquer le thème dès le chargement du composant
+  useEffect(() => {
+    if (
+      localStorage.getItem("theme") === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+      setDarkMode(true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+      setDarkMode(false);
+
+    }
+  }, []);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+      localStorage.setItem("theme", "dark");
+      setDarkMode(true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+      localStorage.setItem("theme", "light");
+      setDarkMode(false);
+    }
+  }, [darkMode]);
 
   const inputChange = (value, name, errField) => {
     setState((prevState) => ({
@@ -47,14 +82,14 @@ const Login = () => {
           password: state.password.trim(),
         });
 
-        localStorage.setItem('accessToken', response.data.accessToken);
-        localStorage.setItem('refreshToken', response.data.refreshToken);
-        navigate('/accueil');
+        localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem("refreshToken", response.data.refreshToken);
+        navigate("/accueil");
       } catch (error) {
         setState((prevState) => ({
           ...prevState,
-          email: '',
-          password: '',
+          email: "",
+          password: "",
         }));
         console.log(error);
       }
@@ -64,17 +99,21 @@ const Login = () => {
 
   return (
     <div className="md:container m-auto flex justify-center items-center h-screen">
-      <div className="md:w-2/5 border border-gray-300 rounded-md p-10">
-        <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Sign in to your account
-        </h2>
+      <div className="md:w-2/5 border border-gray-400 rounded-md pt-16 pb-10 px-10 relative">
+        <img
+          src={soleil}
+          alt="Passer en mode jour"
+          onClick={() => setDarkMode(!darkMode)}
+          className="w-1/12 absolute top-5 right-5 cursor-pointer"
+        />
+        <h2 className="text-center">Sign in to your account</h2>
         <form onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="email"
               Email
               address
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className="block text-sm font-medium leading-6"
             >
               Email address
             </label>
@@ -87,27 +126,20 @@ const Login = () => {
                   inputChange(e.target.value, "email", "emailErr")
                 }
                 value={state.email}
-                className="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
               <div className="text-red-500">{state.emailErr}</div>
             </div>
           </div>
-
           <div className="mt-4">
             <div className="flex items-center justify-between">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6"
               >
                 Password
               </label>
               <div className="text-sm">
-                <a
-                  href="#"
-                  className="font-semibold text-indigo-600 hover:text-indigo-500"
-                >
-                  Forgot password?
-                </a>
+                <a href="#">Forgot password?</a>
               </div>
             </div>
             <div className="mt-2">
@@ -119,7 +151,6 @@ const Login = () => {
                   inputChange(e.target.value, "password", "passwordErr")
                 }
                 value={state.password}
-                className="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
               <div className="text-red-500">{state.passwordErr}</div>
             </div>
@@ -130,14 +161,8 @@ const Login = () => {
             icon={<LoginIcon color={"#FFFFFF"} />}
             iconLoading={<btnLoading />}
           />
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{" "}
-            <a
-              href="#"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
-              Start a 14 day free trial
-            </a>
+          <p className="mt-10 text-center text-sm">
+            Not a member? <a href="#">Start a 14 day free trial</a>
           </p>
         </form>
       </div>
