@@ -101,7 +101,7 @@ const Login = () => {
     <div className="md:container m-auto flex justify-center items-center h-screen">
       <div className="md:w-2/5 border border-gray-400 rounded-md pt-16 pb-10 px-10 relative">
         <img
-          src={soleil}
+          src={darkMode ? soleil : crepuscule}
           alt="Passer en mode jour"
           onClick={() => setDarkMode(!darkMode)}
           className="w-1/12 absolute top-5 right-5 cursor-pointer"
