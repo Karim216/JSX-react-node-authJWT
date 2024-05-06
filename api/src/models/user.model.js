@@ -58,6 +58,7 @@ User.findUserByEmail = async (email) => {
     // Utilisez findOne pour trouver un utilisateur par son email.
     const user = await User.findOne({ where: { email: email } });
     if(user){
+      console.log(user)
       return user; // user sera null si aucun utilisateur n'est trouvé
     }
     throw { kind: 'not_found' };
