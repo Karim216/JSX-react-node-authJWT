@@ -36,6 +36,7 @@ const Login = () => {
     }
   }, []);
 
+  // Appliquer le thème dès que darkMode change
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -50,6 +51,7 @@ const Login = () => {
     }
   }, [darkMode]);
 
+  // Fonction pour gérer les changements des inputs
   const inputChange = (value, name, errField) => {
     setState((prevState) => ({
       ...prevState,
