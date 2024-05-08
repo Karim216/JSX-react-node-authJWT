@@ -1,9 +1,33 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
-  darkMode: 'class',
+  darkMode: "class",
   theme: {
     extend: {
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
+      },
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: "1rem",
+          sm: "2rem",
+          lg: "4rem",
+          xl: "5rem",
+          "2xl": "6rem",
+        },
+        screens: {
+          sm: "640px",
+          md: "768px",
+          lg: "1024px",
+          xl: "1280px",
+          "2xl": "1536px",
+        },
+      },
       colors: {
         gray: {
           100: "#f8f9fa",
@@ -95,45 +119,3 @@ export default {
   },
   plugins: [],
 };
-
-// module.exports = {
-//   theme: {
-//     extend: {
-//       colors: {
-//         gray: {
-//           100: '#f8f9fa',
-//           200: '#e9ecef',
-//           300: '#dee2e6',
-//           400: '#ced4da', // border
-//           500: '#adb5bd',
-//           600: '#6c757d', // text par defaut
-//           700: '#495057',
-//           800: '#343a40',
-//           900: '#212529',
-//         },
-//         yellow: '#DDAC17',
-//         yellow-dark: '#CD9C08',
-//         light: '#F6F6F6', // text mode dark
-//         dark: '#1F2123', // text mode light
-//         white: '#fff', // background mode clair
-//         black: '#000', // background mode dark
-//         blue: '#003A5C',
-//       },
-//     },
-//     fontFamily: {
-//       sans: ['arial', 'sans-serif'],
-//       mono: ['Consolas', 'monospace'],
-//     },
-//     fontWeight: {
-//         thin: '100',
-//         extralight: '200',
-//         light: '300',
-//         normal: '400',
-//         medium: '500',
-//         semibold: '600',
-//         bold: '700',
-//         extrabold: '800',
-//         black: '900',
-//       },
-//   },
-// }

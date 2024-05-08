@@ -23,8 +23,7 @@ const Home = () => {
   useEffect(() => {
     getUser()(dispatch)
       .then((data) => {
-        return;
-        // console.log("Données utilisateur : ", data);
+        console.log("Données utilisateur : ", data);
       })
       .catch((error) => {
         console.log("Erreur : ", error);
