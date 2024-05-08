@@ -13,11 +13,11 @@ function App() {
     <Router>
       <Suspense fallback={<Loading />}>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/accueil" element={<Home />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home />}>
             <Route index element={<Article />} />
-            <Route path="/accueil/articles" element={<Article />} />
-            <Route path="/accueil/users" element={<Users />} />
+            <Route path="/articles" element={<Article />} />
+            <Route path="/users" element={<Users />} />
           </Route>
         </Routes>
       </Suspense>

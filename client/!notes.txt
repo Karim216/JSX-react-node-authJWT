@@ -22,6 +22,64 @@ Template NodeJS - ReactJS - MySQL
   index.html								...
 
 
+Architecture "Container-Presentation" ou "Smart-Dumb Components"
+----------------------------------------------------------------
+
+Cette approche consiste à créer deux types de composants : 
+- Composants de présentation (Dumb ou Presentation Components)
+- Composants conteneurs (Smart ou Container Components)
+
+src/
+|-- assets/                 # Ressources statiques (images, icônes, etc.)
+|-- components/             # Composants de présentation
+|   |-- Button/
+|   |   |-- Button.jsx      # Composant de bouton réutilisable
+|   |   `-- Button.css      # Styles spécifiques au bouton
+|   |-- Input/
+|   |-- Layout/
+|   `-- ...
+|-- containers/             # Composants conteneurs (logique)
+|   |-- LoginFormContainer.jsx
+|   `-- UserProfileContainer.jsx
+|-- context/                # Contextes pour la gestion d'état global (Context API)
+|   |-- AuthContext.js
+|   `-- ThemeContext.js
+|-- hooks/                  # Hooks personnalisés
+|   |-- useAuth.js
+|   `-- useFetch.js
+|-- pages/                  # Composants de page, potentiellement des conteneurs aussi
+|   |-- HomePage.jsx
+|   |-- LoginPage.jsx
+|   `-- DashboardPage.jsx
+|-- services/               # Services pour la gestion des API, logique métier
+|   |-- api.js
+|   `-- authService.js
+|-- utils/                  # Fonctions utilitaires réutilisables
+|-- App.jsx                 # Composant racine de l'application
+`-- index.js                # Point d'entrée principal
+
+Explication des Dossiers
+------------------------
+
+1. assets/: Contient toutes les ressources statiques telles que les images, les fichiers de style globaux, et les polices de caractères.
+
+2. components/: Stocke tous les composants de présentation. Chaque composant a son propre dossier qui peut inclure son code JSX et ses fichiers de style. Cela permet de les réutiliser facilement à travers l'application sans logique interne complexe.
+
+4. containers/: Contient les composants conteneurs qui gèrent la logique, l'état et les effets secondaires. Ces composants passent des données et des fonctions aux composants de présentation.
+
+5. context/: Si vous utilisez Context API pour gérer l'état global, chaque contexte peut être défini ici avec son provider et la logique associée.
+
+6. hooks/: Regroupe tous vos hooks personnalisés. Cela pourrait inclure des hooks pour gérer les appels d'API, les événements globaux, ou des fonctions spécifiques à l'application.
+
+7. pages/: Contient les composants de haut niveau qui correspondent aux différentes routes ou pages de l'application. Chaque page peut assembler plusieurs composants de présentation et conteneurs pour construire des vues complètes.
+
+8. services/: Dossier pour organiser la logique spécifique aux appels d'API et la gestion des données externes. Par exemple, vous pourriez avoir un service pour gérer l'authentification ou la communication avec des APIs REST.
+
+9. utils/: Fonctions utilitaires qui peuvent être utilisées à travers l'application. Elles n'ont pas d'état et sont purement fonctionnelles, comme des helpers pour formater des données ou des validateurs.
+
+10. App.jsx: Le composant racine qui assemble généralement la structure de navigation principale et le routing.
+
+11. index.js: Le point d'entrée pour l'application qui monte le composant App avec React DOM.
 
 
 

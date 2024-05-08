@@ -1,10 +1,8 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import Button from "../../components/Button/Button";
 import LoginIcon from "../../assets/icons/login";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import soleil from "../../assets/tendances/soleil.svg";
-import crepuscule from "../../assets/tendances/crepuscule.svg";
 import { ConfigContext } from "../../index.jsx";
 
 const Login = () => {
@@ -16,40 +14,6 @@ const Login = () => {
     password: "",
     passwordErr: "",
   });
-  const [darkMode, setDarkMode] = useState(false);
-
-  // Appliquer le thème dès le chargement du composant
-  useEffect(() => {
-    if (
-      localStorage.getItem("theme") === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      document.documentElement.classList.add("dark");
-      document.documentElement.classList.remove("light");
-      setDarkMode(true);
-    } else {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
-      setDarkMode(false);
-
-    }
-  }, []);
-
-  // Appliquer le thème dès que darkMode change
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      document.documentElement.classList.remove("light");
-      localStorage.setItem("theme", "dark");
-      setDarkMode(true);
-    } else {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
-      localStorage.setItem("theme", "light");
-      setDarkMode(false);
-    }
-  }, [darkMode]);
 
   // Fonction pour gérer les changements des inputs
   const inputChange = (value, name, errField) => {
@@ -62,6 +26,8 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    console.log(event)
 
     if (state.email === "") {
       setState((prevState) => ({
@@ -86,7 +52,7 @@ const Login = () => {
 
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
-        navigate("/accueil");
+        navigate("/");
       } catch (error) {
         setState((prevState) => ({
           ...prevState,
@@ -102,13 +68,7 @@ const Login = () => {
   return (
     <div className="md:container m-auto flex justify-center items-center h-screen">
       <div className="md:w-2/5 border border-gray-400 rounded-md pt-16 pb-10 px-10 relative">
-        <img
-          src={darkMode ? soleil : crepuscule}
-          alt="Passer en mode jour"
-          onClick={() => setDarkMode(!darkMode)}
-          className="w-1/12 absolute top-5 right-5 cursor-pointer"
-        />
-        <h2 className="text-center">Sign in to your account</h2>
+        <h2 className="text-center my-4">Sign in to your account</h2>
         <form onSubmit={handleSubmit}>
           <div>
             <label

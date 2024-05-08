@@ -24,7 +24,7 @@
   h2,
   h3,
   h4 {
-    @apply font-bold text-black dark:text-white p-0 m-0;
+    @apply font-bold text-black dark:text-white;
   }
   h1 {
     @apply text-4xl;

@@ -27,7 +27,7 @@ const Home = () => {
       })
       .catch((error) => {
         console.log("Erreur : ", error);
-        navigate("/");
+        navigate("/login");
       });
 
       console.log("connexion")
@@ -41,7 +41,7 @@ const Home = () => {
       // console.log(response)
       localStorage.clear();
       localStorage.removeItem("accessToken");
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.log(error);
     }
