@@ -3,6 +3,7 @@ module.exports = (userapp) => {
   const router = require("express").Router();
   const verifyToken = require("../middlewares/auth.jwt.js");
 
+  // All routes are protected and can only be accessed by authenticated users
   router.use(verifyToken);
 
   router.post("/", users.createUser);
