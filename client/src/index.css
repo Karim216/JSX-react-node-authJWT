@@ -12,6 +12,14 @@
     @apply box-border p-0 m-0;
   }
 
+  html {
+    @apply h-lvh;
+  }
+
+  body{
+    @apply h-full;
+  }
+
   html,
   body,
   main,

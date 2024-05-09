@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../redux/actions/users/actionFetchUser";
 import Loading from "../../components/Loading/Loading";
+import Footer from "../../components/Footer/Footer";
 
 const Header = lazy(() => import("../../components/Header/Header"));
 const config = {
@@ -12,11 +13,10 @@ const config = {
 };
 
 const Home = () => {
+  const { currentUser } = useSelector((state) => state);
 
-  const { currentUser } = useSelector((state) => state)
-
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [darkMode, setDarkMode] = useState(false);
   useEffect(() => {
@@ -72,10 +72,18 @@ const Home = () => {
       localStorage.setItem("theme", "light");
     }
   };
-  return currentUser.isLoading ? (<Loading />) : (
+  return currentUser.isLoading ? (
+    <Loading />
+  ) : (
     <Fragment>
-      <Header isDarkMode={darkMode} onHandleTheme={handleTheme} data={currentUser.data} disconnect={handleDisconnect} />
+      <Header
+        isDarkMode={darkMode}
+        onHandleTheme={handleTheme}
+        data={currentUser.data}
+        disconnect={handleDisconnect}
+      />
       <Outlet />
+      <Footer />
     </Fragment>
   );
 };

@@ -1,9 +1,8 @@
 import React, { useContext, useState } from "react";
-import Button from "../../components/Button/Button";
-import LoginIcon from "../../assets/icons/login";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ConfigContext } from "../../index.jsx";
+import LoginForm from "../../components/LoginForm/LoginForm.jsx";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -66,69 +65,11 @@ const Login = () => {
   };
 
   return (
-    <div className="md:container m-auto flex justify-center items-center h-screen">
-      <div className="md:w-2/5 border border-gray-400 rounded-md pt-16 pb-10 px-10 relative">
-        <h2 className="text-center my-4">Sign in to your account</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label
-              htmlFor="email"
-              Email
-              address
-              className="block text-sm font-medium leading-6"
-            >
-              Email address
-            </label>
-            <div className="mt-2">
-              <input
-                id="email"
-                type="email"
-                autoComplete="email"
-                onChange={(e) =>
-                  inputChange(e.target.value, "email", "emailErr")
-                }
-                value={state.email}
-              />
-              <div className="text-red-500">{state.emailErr}</div>
-            </div>
-          </div>
-          <div className="mt-4">
-            <div className="flex items-center justify-between">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium leading-6"
-              >
-                Password
-              </label>
-              <div className="text-sm">
-                <a href="#">Forgot password?</a>
-              </div>
-            </div>
-            <div className="mt-2">
-              <input
-                id="password"
-                type="password"
-                autoComplete="current-password"
-                onChange={(e) =>
-                  inputChange(e.target.value, "password", "passwordErr")
-                }
-                value={state.password}
-              />
-              <div className="text-red-500">{state.passwordErr}</div>
-            </div>
-          </div>
-          <Button
-            label="Sign in"
-            cssCustom={"mt-10"}
-            icon={<LoginIcon color={"#FFFFFF"} />}
-            iconLoading={<btnLoading />}
-          />
-          <p className="mt-10 text-center text-sm">
-            Not a member? <a href="#">Start a 14 day free trial</a>
-          </p>
-        </form>
-      </div>
-    </div>
+    <LoginForm
+      state={state}
+      onInputChange={inputChange}
+      handleSubmit={handleSubmit}
+    />
   );
 };
 
