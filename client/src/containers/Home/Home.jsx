@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, lazy } from "react";
+import React, { useState, Fragment, useEffect, lazy } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../redux/actions/users/actionFetchUser";
@@ -18,8 +18,7 @@ const Home = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  console.log(currentUser)
-
+  const [darkMode, setDarkMode] = useState(false);
   useEffect(() => {
     getUser()(dispatch)
       .then((data) => {
@@ -29,10 +28,23 @@ const Home = () => {
         console.log("Erreur : ", error);
         navigate("/login");
       });
-
-      console.log("connexion")
   }, []);
 
+  useEffect(() => {
+    if (
+      localStorage.getItem("theme") === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+      setDarkMode(true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+      setDarkMode(false);
+    }
+  }, []);
 
   const handleDisconnect = async () => {
     try {
@@ -46,9 +58,23 @@ const Home = () => {
       console.log(error);
     }
   };
+
+  const handleTheme = () => {
+    if (localStorage.getItem("theme") === "light") {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+      setDarkMode(true);
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+      setDarkMode(false);
+      localStorage.setItem("theme", "light");
+    }
+  };
   return currentUser.isLoading ? (<Loading />) : (
     <Fragment>
-      <Header data={currentUser.data} disconnect={handleDisconnect} />
+      <Header isDarkMode={darkMode} onHandleTheme={handleTheme} data={currentUser.data} disconnect={handleDisconnect} />
       <Outlet />
     </Fragment>
   );

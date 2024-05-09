@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const item = ({ data }) => {
-  return data?.map((item) => {
+  return data?.map((item, index) => {
     return (
-      <article>
+      <article key={index}>
         <Link to="#">
           <div>
             <img src={item.img} alt={item.imgTitle} />
