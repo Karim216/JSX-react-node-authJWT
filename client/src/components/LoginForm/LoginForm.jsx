@@ -53,7 +53,6 @@ const LoginForm = ({ onInputChange, handleSubmit, state }) => {
           label="Sign in"
           cssCustom={"mt-10"}
           icon={<LoginIcon color={"#FFFFFF"} />}
-          iconLoading={<btnLoading />}
         />
         <p className="mt-10 text-center text-sm">
           Not a member? <a href="#">Start a 14 day free trial</a>
